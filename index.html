@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameZone - Android Games</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6fa;color:#202124;font-family:Arial,sans-serif}
+header{background:#152b22;color:white;padding:20px 16px}
+header h1{margin:0 0 6px;color:#6ee7a0}
+header p{margin:0;color:#d3e6dc;font-size:14px}
+.search{padding:15px;background:white}
+input{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+h2{font-size:19px;margin:20px 15px 10px}
+.games{padding:0 12px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:white;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+.cover{height:110px;display:flex;align-items:center;justify-content:center;font-size:43px;background:linear-gradient(135deg,#152b22,#397c5b)}
+.info{padding:11px}
+.info h3{font-size:16px;margin:0 0 7px}
+.info p{font-size:12px;color:#666;line-height:1.5;min-height:36px}
+.btn{display:block;text-align:center;background:#16834a;color:white;text-decoration:none;padding:10px 5px;border-radius:7px;font-size:13px;font-weight:bold}
+footer{text-align:center;color:#777;font-size:12px;padding:25px 15px}
+.notice{margin:14px;padding:12px;background:#e8f5ed;border-radius:8px;font-size:13px;line-height:1.5}
+</style>
+</head>
+<body>
+<header>
+<h1>🎮 GameZone</h1>
+<p>Discover Android Games</p>
+</header>
+<div class="search">
+<input id="search" placeholder="🔍 Search games..." oninput="filterGames()">
+</div>
+<h2>🔥 Popular Games</h2>
+<div class="games" id="games"></div>
+<div class="notice">Download links will open the official game page. Always check the source before installing an app.</div>
+<footer>GameZone © 2026 · Independent gaming links website</footer>
+<script>
+const games=[
+{name:"Subway Surfers",icon:"🏃",desc:"Run, dodge and collect coins.",url:"https://play.google.com/store/search?q=Subway%20Surfers&c=apps"},
+{name:"Free Fire",icon:"🎯",desc:"Battle royale action game.",url:"https://play.google.com/store/search?q=Free%20Fire&c=apps"},
+{name:"Hill Climb Racing",icon:"🏎️",desc:"Drive across challenging hills.",url:"https://play.google.com/store/search?q=Hill%20Climb%20Racing&c=apps"},
+{name:"Temple Run 2",icon:"🏃‍♂️",desc:"Escape and run through temples.",url:"https://play.google.com/store/search?q=Temple%20Run%202&c=apps"},
+{name:"Candy Crush",icon:"🍬",desc:"Match colourful candies.",url:"https://play.google.com/store/search?q=Candy%20Crush&c=apps"},
+{name:"Ludo King",icon:"🎲",desc:"Play the classic board game.",url:"https://play.google.com/store/search?q=Ludo%20King&c=apps"}
+];
+function render(list){
+document.getElementById("games").innerHTML=list.map(g=>`
+<div class="card">
+<div class="cover">${g.icon}</div>
+<div class="info"><h3>${g.name}</h3>
+<p>${g.desc}</p>
+<a class="btn" href="${g.url}" target="_blank" rel="noopener">View / Download ↗</a>
+</div></div>`).join("");
+}
+function filterGames(){
+const q=document.getElementById("search").value.toLowerCase();
+render(games.filter(g=>g.name.toLowerCase().includes(q)));
+}
+render(games);
+</script>
+</body>
+</html>
